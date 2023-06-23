@@ -69,21 +69,19 @@ public class animation : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W)) {
             transform.position += transform.forward * movementSpeed * Time.deltaTime;
-            
             // transform.position = transform.position + new Vector3(horizontalInput * movementSpeed * Time.deltaTime, 0, verticalInput * movementSpeed * Time.deltaTime);
         }
         else if (Input.GetKey(KeyCode.S)) {
             transform.position -= transform.forward * movementSpeed * Time.deltaTime;
-            
             // transform.position = transform.position - new Vector3(horizontalInput * -movementSpeed * Time.deltaTime, 0, verticalInput * -movementSpeed * Time.deltaTime);
         }
         else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
-            // transform.rotation = Quaternion.Slerp(transform.rotation, target,  Time.deltaTime * smooth);
+            transform.rotation = Quaternion.Slerp(transform.rotation, target,  Time.deltaTime * smooth);
         }
         Rotation();
     }
 
     private void Rotation(){
-        transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X")*4f, 0));
+        transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X")*3f, 0));
     }
 }
