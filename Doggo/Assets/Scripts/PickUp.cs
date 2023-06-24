@@ -9,8 +9,10 @@ public class PickUp : MonoBehaviour
     float distance;
     public bool canHold = true;
     public GameObject item;
-    public GameObject tempParent;
+    // public GameObject tempParent;
     public bool isHolding = false;
+
+    public Transform PlayerHoldingPosObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,38 +22,36 @@ public class PickUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distance = Vector3.Distance(item.transform.position, tempParent.transform.position);
-        if (distance > 1f){
-            isHolding = false;
-        }
-        if (isHolding==true){
-            item.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            item.transform.SetParent(tempParent.transform);
-            if (Input.GetKey(KeyCode.Q)) {
-                item.GetComponent<Rigidbody>().AddForce(tempParent.transform.forward * throwForce);
-                isHolding = false;
-            }
-        }
-        else 
-        {
-            objectPos = item.transform.position;
-            item.transform.SetParent(null);
-            item.GetComponent<Rigidbody>().useGravity = true;
-            item.transform.position = objectPos;
-        }
-
-            
+        // distance = Vector3.Distance(item.transform.position, tempParent.transform.position);
+        // if (distance > 1f){
+        //     isHolding = false;
+        // }
+        // if (isHolding==true){
+        //     item.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //     item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        //     item.transform.SetParent(tempParent.transform);
+        //     if (Input.GetKey(KeyCode.Q)) {
+        //         item.GetComponent<Rigidbody>().AddForce(tempParent.transform.forward * throwForce);
+        //         isHolding = false;
+        //     }
+        // }
+        // else 
+        // {
+        //     objectPos = item.transform.position;
+        //     item.transform.SetParent(null);
+        //     item.GetComponent<Rigidbody>().useGravity = true;
+        //     item.transform.position = objectPos;
+        // }
+       
     }
     void OnMouseDown(){
-        if (distance <= 1f) {
-            isHolding = true;
-            item.GetComponent<Rigidbody>().useGravity = false;
-            item.GetComponent<Rigidbody>().detectCollisions = true;
-        }
+        this.GetComponent<Rigidbody>().isKinematic = true;
+        this.transform.position = PlayerHoldingPosObj.position;
+        this.transform.parent = PlayerHoldingPosObj.parent;
     }
 
     void OnMouseUp(){
-        isHolding = false;
+        this.transform.parent = null;
+        this.GetComponent<Rigidbody>().isKinematic = false;
     }
 }
