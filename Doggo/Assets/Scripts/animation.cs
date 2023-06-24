@@ -10,6 +10,11 @@ public class animation : MonoBehaviour
     private float tiltAngle;
     public AudioSource audioSource_bark;
     public AudioSource audioSource_grass;
+    private bool standOn2Feet;
+
+    [SerializeField]
+    private GameObject _telemetry;
+    private Telemetry telemetry;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +25,9 @@ public class animation : MonoBehaviour
         tiltAngle = 60.0f;
         audioSource_bark.Stop();
         audioSource_grass.Stop();
+        standOn2Feet = false;
+
+        telemetry = _telemetry.GetComponent<Telemetry>();
 
     }
 
@@ -36,37 +44,77 @@ public class animation : MonoBehaviour
         // Rotate the cube by converting the angles into a quaternion.
         Quaternion target = Quaternion.Euler(tiltAroundX, tiltAroundY, 0);
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            if (anim != null) {
+        if (!standOn2Feet){
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                if (anim != null) {
+                        anim.Play("Base Layer.StandingStill", 0 , 0.25f);
+                        standOn2Feet = false;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)) {
+                if (anim != null) {
+                    anim.Play("Base Layer.Walk", 0, 0.25f);
+                    audioSource_grass.Play();
+                }
+            }
+            else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)) {
+                if (anim != null) {
+                    anim.Play("Base Layer.StandingStill", 0, 0.25f);
+                    audioSource_grass.Stop();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.B)) {
+                if (anim != null) {
+                    anim.Play("Base Layer.Bark", 0 , 0.25f);
+                    audioSource_bark.Play();
+                }
+            }
+            else if (Input.GetKeyUp(KeyCode.B)) {
+                if (anim != null) {
                     anim.Play("Base Layer.StandingStill", 0 , 0.25f);
+                    audioSource_bark.Stop();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.E)) {
+                if (anim != null) {
+                    anim.Play("Base Layer.StandOn2Feet", 0 , 0.25f);
+                    standOn2Feet = true;
+                    telemetry.isPick = true;
+                }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)) {
-            if (anim != null) {
-                anim.Play("Base Layer.Walk", 0, 0.25f);
-                audioSource_grass.Play();
+        else {
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                if (anim != null) {
+                        anim.Play("Base Layer.StandingStill", 0 , 0.25f);
+                        standOn2Feet = false;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)) {
+                if (anim != null) {
+                    anim.Play("Base Layer.WalkOn2Feet", 0, 0.25f);
+                    audioSource_grass.Play();
+                }
+            }
+            else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)) {
+                if (anim != null) {
+                    anim.Play("Base Layer.StandOn2Feet", 0, 0.25f);
+                    audioSource_grass.Stop();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.B)) {
+                if (anim != null) {
+                    anim.Play("Base Layer.Bark", 0 , 0.25f);
+                    audioSource_bark.Play();
+                }
+            }
+            else if (Input.GetKeyUp(KeyCode.B)) {
+                if (anim != null) {
+                    anim.Play("Base Layer.StandingStill", 0 , 0.25f);
+                    audioSource_bark.Stop();
+                }
             }
         }
-        else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)) {
-            if (anim != null) {
-                anim.Play("Base Layer.StandingStill", 0, 0.25f);
-                audioSource_grass.Stop();
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.B)) {
-            if (anim != null) {
-                anim.Play("Base Layer.Bark", 0 , 0.25f);
-                audioSource_bark.Play();
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.B)) {
-            if (anim != null) {
-                anim.Play("Base Layer.StandingStill", 0 , 0.25f);
-                audioSource_bark.Stop();
-            }
-        }
-        
-
         if (Input.GetKey(KeyCode.W)) {
             transform.position += transform.forward * movementSpeed * Time.deltaTime;
             // transform.position = transform.position + new Vector3(horizontalInput * movementSpeed * Time.deltaTime, 0, verticalInput * movementSpeed * Time.deltaTime);
@@ -82,6 +130,6 @@ public class animation : MonoBehaviour
     }
 
     private void Rotation(){
-        transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X")*3f, 0));
+        transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X")*4f, 0));
     }
 }

@@ -38,6 +38,9 @@
   <ItemGroup>
      <Compile Include="Assets/Scripts/animation.cs" />
      <Compile Include="Assets/Scripts/SmoothCameraFollow.cs" />
+     <Compile Include="Assets/Scripts/Trigger.cs" />
+     <Compile Include="Assets/Scripts/Telemetry.cs" />
+     <Compile Include="Assets/Scripts/PickUp.cs" />
      <Compile Include="Assets/Scripts/VoiceCommand.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/ducb/Unity/Hub/Editor/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

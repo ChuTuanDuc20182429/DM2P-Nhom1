@@ -343,7 +343,10 @@
 -r:"Library/Bee/artifacts/2400b0aE.dag/Unity.VisualStudio.Editor.ref.dll"
 -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Scripts/PickUp.cs"
 "Assets/Scripts/SmoothCameraFollow.cs"
+"Assets/Scripts/Telemetry.cs"
+"Assets/Scripts/Trigger.cs"
 "Assets/Scripts/VoiceCommand.cs"
 "Assets/Scripts/animation.cs"
 -langversion:9.0

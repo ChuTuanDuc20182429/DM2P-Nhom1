@@ -24,6 +24,6 @@ public class SmoothCameraFollow : MonoBehaviour
     }
 
     private void Rotation() {
-        finalOffset = Quaternion.AngleAxis(Input.GetAxis("Mouse X")*2f, Vector3.up) * finalOffset;
+        finalOffset = Quaternion.AngleAxis(Input.GetAxis("Mouse X")*4f, Vector3.up) * finalOffset;
     }
 }
