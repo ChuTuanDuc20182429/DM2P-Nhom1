@@ -80,14 +80,17 @@ public class animation : MonoBehaviour
                     anim.Play("Base Layer.StandOn2Feet", 0 , 0.25f);
                     standOn2Feet = true;
                     telemetry.isPick = true;
+                    Debug.Log("telemetry.isPick " + telemetry.isPick);
                 }
             }
         }
         else {
             if (Input.GetKeyDown(KeyCode.Space)) {
                 if (anim != null) {
-                        anim.Play("Base Layer.StandingStill", 0 , 0.25f);
-                        standOn2Feet = false;
+                    anim.Play("Base Layer.StandingStill", 0 , 0.25f);
+                    standOn2Feet = false;
+                    telemetry.isPick = false;
+                    Debug.Log("telemetry.isPick " + telemetry.isPick);
                 }
             }
             else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)) {

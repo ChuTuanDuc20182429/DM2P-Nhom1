@@ -27,7 +27,7 @@ public class Trigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Enter" + other.name);
+        Debug.Log("Enter " + other.name);
         if (other.tag == "Dog")
         {
             pick = true;
@@ -36,10 +36,14 @@ public class Trigger : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log("Stay" + other.name);
+        Debug.Log("Stay " + other.name);
     }
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("Exit" + other.name);
+        Debug.Log("Exit " + other.name);
+        if (other.tag == "Dog" && telemetry.isPick == false)
+        {
+            pick = false;
+        }
     }
 }

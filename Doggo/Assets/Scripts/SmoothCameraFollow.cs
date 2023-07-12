@@ -11,8 +11,8 @@ public class SmoothCameraFollow : MonoBehaviour
 
     private void Awake()
     {
-        _offset = transform.position - target.position;
-        finalOffset = _offset;
+        //_offset = transform.position - target.position;
+        finalOffset = transform.position - target.position;
     }
 
     private void LateUpdate()
